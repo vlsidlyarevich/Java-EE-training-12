@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGrid columns="1" width="700" rowClasses="input" styleClass="outputGrid">
+
+            <h:outputLabel id="userIdLabel" value="#{msg['userID']}" styleClass="label"/>
+            <h:inputText id="idInput" styleClass="input" value="#{user.id}">
+                <f:ajax event="blur" render="idError"/>
+            </h:inputText>
+            <h:message for="idInput" id="idError" styleClass="message"/>
+
+            <h:outputLabel id="nameLabel" value="#{msg['userName']}" styleClass="label"/>
+            <h:inputText id="nameInput" styleClass="input" value="#{user.name}">
+                <f:ajax event="blur" render="nameError"/>
+            </h:inputText>
+            <h:message for="nameInput" id="nameError" styleClass="message"/>
+
+            <h:outputLabel id="passwordLabel" value="#{msg['inputPassword']}" styleClass="label"/>
+            <h:inputSecret id="PasswordInput" styleClass="input" value="#{user.password}">
+                <f:validator validatorId="UserDataValidator"/>
+                <f:ajax event="blur" render="passwordError"/>
+            </h:inputSecret>
+            <h:message for="PasswordInput" id="passwordError" styleClass="message"/>
+
+            <h:commandButton value="Submit" styleClass="input">
+                <f:ajax render="@form"/>
+            </h:commandButton>
+
+            <h:outputLabel value="#{user.name} #{user.id} #{user.password}" escape="false" styleClass="label"/>
+
+            <h:panelGrid columns="3">
+                <h:commandButton value="ru" immediate="true" action="#{language.changeLanguage('ru')}">
+                </h:commandButton>
+                <h:commandButton value="eng" immediate="true" action="#{language.changeLanguage('en')}">
+                </h:commandButton>
+                <h:commandButton value="deu" immediate="true" action="#{language.changeLanguage('de')}">
+                </h:commandButton>
+            </h:panelGrid>
+        </h:panelGrid>
+
+
+    </h:form>
+</h:body>
+
+</html>
